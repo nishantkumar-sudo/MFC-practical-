@@ -1,0 +1,42 @@
+import numpy as np
+from sympy import Matrix
+
+def create_matrix():
+    r = int(input("Enter number of rows: "))
+    c = int(input("Enter number of columns: "))
+    if r != c:
+        print("Matrix must be square!")
+        return None
+    M = []
+    for i in range(r):
+        row = []
+        for j in range(c):
+            val = float(input(f"Enter element ({i+1},{j+1}): "))
+            row.append(val)
+        M.append(row)
+    return np.array(M)
+
+def matrix_operations():
+    A = create_matrix()
+    if A is None:
+        return
+    print("\nMatrix A:\n", A)
+
+    M = Matrix(A)
+    det = M.det()
+    print("\nDeterminant =", det)
+
+    if det == 0:
+        print("\nMatrix is singular → No inverse or adjoint exists.")
+        return
+
+    cof = M.cofactor_matrix()
+    adj = M.adjugate()
+    inv = M.inv()
+
+    print("\nCofactor Matrix:\n", np.array(cof.tolist(), dtype=float))
+    print("\nAdjoint Matrix:\n", np.array(adj.tolist(), dtype=float))
+    print("\nInverse Matrix:\n", np.array(inv.tolist(), dtype=float))
+
+# --- MAIN PROGRAM ---
+matrix_operations()
