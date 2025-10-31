@@ -1,0 +1,52 @@
+import numpy as np
+
+def create_vector():
+    n = int(input("Enter number of elements in vector: "))
+    v = []
+    for i in range(n):
+        val = complex(input(f"Enter element {i+1}: "))
+        v.append(val)
+    t = input("Column vector? (y/n): ").lower()
+    return np.array(v).reshape(-1,1) if t == 'y' else np.array(v)
+
+def create_matrix():
+    r = int(input("Enter number of rows: "))
+    c = int(input("Enter number of columns: "))
+    M = []
+    for i in range(r):
+        row = []
+        for j in range(c):
+            val = complex(input(f"Enter element ({i+1},{j+1}): "))
+            row.append(val)
+        M.append(row)
+    return np.array(M)
+
+def transpose(mat):
+    return np.transpose(mat)
+
+def conjugate(mat):
+    return np.conjugate(mat)
+
+def transpose_vector(vec, to='row'):
+    v = np.array(vec)
+    if v.ndim == 1:
+        v = v.reshape(-1,1)
+    return v.T if to == 'row' else v
+
+
+# --- MAIN PROGRAM ---
+print("1. Create Vector\n2. Create Matrix")
+choice = input("Enter choice (1/2): ")
+
+if choice == '1':
+    v = create_vector()
+    print("Vector:\n", v)
+    print("Transpose:\n", transpose(v))
+    print("Conjugate:\n", conjugate(v))
+elif choice == '2':
+    M = create_matrix()
+    print("Matrix:\n", M)
+    print("Transpose:\n", transpose(M))
+    print("Conjugate:\n", conjugate(M))
+else:
+    print("Invalid choice!")
