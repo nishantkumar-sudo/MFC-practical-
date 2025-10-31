@@ -1,0 +1,25 @@
+import numpy as np
+from sympy import Matrix
+
+def create_matrix():
+    r = int(input("Enter number of rows: "))
+    c = int(input("Enter number of columns: "))
+    M = []
+    for i in range(r):
+        row = []
+        for j in range(c):
+            val = float(input(f"Enter element ({i+1},{j+1}): "))
+            row.append(val)
+        M.append(row)
+    return np.array(M)
+
+def echelon_form_and_rank():
+    A = create_matrix()
+    print("\nOriginal Matrix:\n", A)
+    M = Matrix(A)
+    E = M.echelon_form()
+    print("\nEchelon Form:\n", np.array(E.tolist(), dtype=float))
+    print("\nRank of the Matrix:", M.rank())
+
+# --- MAIN PROGRAM ---
+echelon_form_and_rank()
